@@ -12,16 +12,19 @@ int main(void)
 		TESTS "nl",
 		TESTS "no_nl",
 		TESTS "only_nl",
-		"\0"
+		'\0'
 	};
 
 	while (tests[i])
 	{
 		fd = open(tests[i], O_RDONLY);
-		while ((line = get_next_line(fd)) != NULL)
+		printf("\nfile: %s\n", tests[i]);
+		line = get_next_line(fd);
+		while (line)
 		{
 			printf("%s", line);
 			free(line);
+			line = get_next_line(fd);
 		}
 		i++;
 	}

@@ -1,28 +1,36 @@
-SRCFOLDER = "./get_next_line/"
+SRCDIR = ../
+
+SRCMANDATORY = \
+	$(SRCDIR)get_next_line.c \
+	$(SRCDIR)get_next_line_utils.c
+MANDATORY = $(SRCMANDATORY:.c=.o)
+
+SRCBONUS = get_next_line_bonus.c get_next_line_utils_bonus.c
+BONUS = $(SRCBONUS:$(SRCDIR)/%.c=./%.o)
+
+SRCTEST = main.c
+TEST = $(SRCTEST:.c=.o)
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-SANITIZE = -fsanitize=address
-NAME = gnltest.a
+VALGRIND = valgrind -s --leak-check=yes
+NAME = gnlt.a
 
-SRC =									\
-	main.c								\
-	${SRCFOLDER}get_next_line.c 		\
-	${SRCFOLDER}get_next_line_utils.c 	\
-	${SRCFOLDER}get_next_line.h
+#MANDATORYTEST : $(MANDATORY) $(TEST)
+#	ar rs $(NAME) $(MANDATORY) $(TEST)
 
-TESTMANDATORY = $(SRC:.c=.o)
+# e : $(NAME)
 
-all : $(NAME)
+# CREATE: $(TEST) $(MANDATORY)
+# 	ar rs $(NAME) $(TEST) $(MANDATORY)
 
-$(NAME): $(TESTMANDATORY)
-	ar rs $(NAME) $(TESTMANDATORY)
+e : $(MANDATORY) $(TEST) 
+#	ar rs $(NAME) $(MANDATORY) $(TEST)
+	$(CC) $(CFLAGS) -D BUFFER_SIZE=12 $(SRCMANDATORY) $(SRCTEST)
+	$(VALGRIND) ./a.out
+
 
 clean:
-	rm -f *.o
+	rm -f *.o ../*.o ./$(NAME) ./a.out
 
-fclean: clean
-	rm -f ./$(NAME)
-
-re: fclean all
-
+#re: fclean all
