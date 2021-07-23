@@ -10,54 +10,42 @@ SRCBONUS = \
 	$(SRCDIR)get_next_line_utils_bonus.c
 BONUS = $(SRCBONUS:.c=.o)
 
-SRCTEST = main.c
-TEST = $(SRCTEST:.c=.o)
+SRC_TEST_MANDADORY = mandatory.c
+TEST_MANDADORY = $(SRC_TEST_MANDADORY:.c=.o)
+
+SRC_TEST_BONUS = bonus.c
+TEST_BONUS = $(SRC_TEST_BONUS:.c=.o)
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 VALGRIND = valgrind -s --leak-check=yes
-NAME = gnlt.a
 
-#MANDATORYTEST : $(MANDATORY) $(TEST)
-#	ar rs $(NAME) $(MANDATORY) $(TEST)
+all: m b clean
 
-# e : $(NAME)
-
-# CREATE: $(TEST) $(MANDATORY)
-# 	ar rs $(NAME) $(TEST) $(MANDATORY)
-
-all: m b
-
-m : $(MANDATORY) $(TEST)
+m : $(MANDATORY) $(TEST_MANDADORY)
 	$(info )
 	$(info ********MANDATORY PART***********)
 	$(info )
-	$(CC) $(CFLAGS) -D BUFFER_SIZE=1 $(SRCMANDATORY) $(SRCTEST)
+	$(CC) $(CFLAGS) -D BUFFER_SIZE=1 $(SRCMANDATORY) $(SRC_TEST_MANDADORY)
 	$(VALGRIND) ./a.out
-	$(clean)
-	$(CC) $(CFLAGS) -D BUFFER_SIZE=42 $(SRCMANDATORY) $(SRCTEST)
+	$(CC) $(CFLAGS) -D BUFFER_SIZE=42 $(SRCMANDATORY) $(SRC_TEST_MANDADORY)
 	$(VALGRIND) ./a.out
-	$(clean)
-	$(CC) $(CFLAGS) -D BUFFER_SIZE=107 $(SRCMANDATORY) $(SRCTEST)
+	$(CC) $(CFLAGS) -D BUFFER_SIZE=107 $(SRCMANDATORY) $(SRC_TEST_MANDADORY)
 	$(VALGRIND) ./a.out
-	$(clean)
 
-b : $(BONUS) $(TEST) 
+b : $(BONUS) $(TEST_BONUS)
 	$(info )
 	$(info ********BONUS PART***********)
 	$(info )
-	$(CC) $(CFLAGS) -D BUFFER_SIZE=1 $(SRCBONUS) $(SRCTEST)
+	$(CC) $(CFLAGS) -D BUFFER_SIZE=1 $(SRCBONUS) $(SRC_TEST_BONUS)
 	$(VALGRIND) ./a.out
-	$(clean)
-	$(CC) $(CFLAGS) -D BUFFER_SIZE=42 $(SRCBONUS) $(SRCTEST)
+	$(CC) $(CFLAGS) -D BUFFER_SIZE=42 $(SRCBONUS) $(SRC_TEST_BONUS)
 	$(VALGRIND) ./a.out
-	$(clean)
-	$(CC) $(CFLAGS) -D BUFFER_SIZE=107 $(SRCBONUS) $(SRCTEST)
+	$(CC) $(CFLAGS) -D BUFFER_SIZE=107 $(SRCBONUS) $(SRC_TEST_BONUS)
 	$(VALGRIND) ./a.out
-	$(clean)
-
 
 clean:
-	rm -f *.o ../*.o ./$(NAME) ./a.out
-
-#re: fclean all
+	$(info )
+	$(info ********CLEARING***********)
+	$(info )
+	rm -f *.o ./a.out $(SRCDIR)*.o

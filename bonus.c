@@ -1,4 +1,9 @@
-#include "gnl_test.h"
+# include <fcntl.h>
+# include <stdio.h>
+# include <stdlib.h>
+# define TESTS "./tests/"
+
+#include "../get_next_line_bonus.h"
 
 int main(void)
 {
