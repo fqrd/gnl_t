@@ -12,6 +12,8 @@ int main(void)
 		TESTS "nl",
 		TESTS "no_nl",
 		TESTS "only_nl",
+		TESTS "long_nl",
+		TESTS "long_no_nl",
 		'\0'
 	};
 
