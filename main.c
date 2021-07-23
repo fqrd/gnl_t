@@ -20,11 +20,11 @@ int main(void)
 	while (tests[i])
 	{
 		fd = open(tests[i], O_RDONLY);
-		printf("\nfile: %s\n", tests[i]);
+		printf("file: %s\n", tests[i]);
 		line = get_next_line(fd);
 		while (line)
 		{
-			printf("%s", line);
+			// printf("%s", line);
 			free(line);
 			line = get_next_line(fd);
 		}
