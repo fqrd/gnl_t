@@ -18,7 +18,7 @@ TEST_BONUS = $(SRC_TEST_BONUS:.c=.o)
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-VALGRIND = valgrind -s --leak-check=yes
+VALGRIND = valgrind -q -s --leak-check=yes
 
 all: m b clean
 
