@@ -49,12 +49,12 @@ mm :
 	$(info )
 	$(info ********MANDATORY PART***********)
 	$(info )
-	@gcc -D BUFFER_SIZE=1 $(CFLAGS) -c $(SRCMANDATORY) $(SRC_TESTS_MANDADORY)
-	@gcc ./*o -o output && $(FSANITIZE) ./output
-	@gcc -D BUFFER_SIZE=42 $(CFLAGS) -c $(SRCMANDATORY) $(SRC_TESTS_MANDADORY)
-	@gcc ./*o -o output && $(FSANITIZE) ./output
-	@gcc -D BUFFER_SIZE=107 $(CFLAGS) -c $(SRCMANDATORY) $(SRC_TESTS_MANDADORY)
-	@gcc ./*o -o output && $(FSANITIZE) ./output
+	@gcc -D BUFFER_SIZE=1 $(CFLAGS) -c $(SRCMANDATORY) $(SRC_TESTS_MANDADORY) $(FSANITIZE)
+	@gcc ./*o -o output && ./output
+	@gcc -D BUFFER_SIZE=42 $(CFLAGS) -c $(SRCMANDATORY) $(SRC_TESTS_MANDADORY) $(FSANITIZE)
+	@gcc ./*o -o output && ./output
+	@gcc -D BUFFER_SIZE=107 $(CFLAGS) -c $(SRCMANDATORY) $(SRC_TESTS_MANDADORY) $(FSANITIZE)
+	@gcc ./*o -o output && ./output
 	$(info )
 	rm -f *.o ./output $(SRCDIR)*.o
 
@@ -62,12 +62,12 @@ mb : $(BONUS) $(TEST_BONUS)
 	$(info )
 	$(info ********BONUS PART***********)
 	$(info )
-	@gcc -D BUFFER_SIZE=1 $(CFLAGS) -c $(SRCBONUS) $(SRC_TESTS_BONUS)
-	@gcc ./*o -o output && $(FSANITIZE) ./output
-	@gcc -D BUFFER_SIZE=42 $(CFLAGS) -c $(SRCBONUS) $(SRC_TESTS_BONUS)
-	@gcc ./*o -o output && $(FSANITIZE) ./output
-	@gcc -D BUFFER_SIZE=107 $(CFLAGS) -c $(SRCBONUS) $(SRC_TESTS_BONUS)
-	@gcc ./*o -o output && $(FSANITIZE) ./output
+	@gcc -D BUFFER_SIZE=1 $(CFLAGS) -c $(SRCBONUS) $(SRC_TESTS_BONUS) $(FSANITIZE)
+	@gcc ./*o -o output && ./output
+	@gcc -D BUFFER_SIZE=42 $(CFLAGS) -c $(SRCBONUS) $(SRC_TESTS_BONUS) $(FSANITIZE)
+	@gcc ./*o -o output && ./output
+	@gcc -D BUFFER_SIZE=107 $(CFLAGS) -c $(SRCBONUS) $(SRC_TESTS_BONUS) $(FSANITIZE)
+	@gcc ./*o -o output && ./output
 	$(info )
 	rm -f *.o ./output $(SRCDIR)*.o
 
