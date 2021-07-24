@@ -1,12 +1,8 @@
 #include "../get_next_line.h"
-# define TESTS "./tests/"
-# ifndef BUFFER_SIZE
-# define BUFFER_SIZE 0
-# endif
-
-# include <fcntl.h>
-# include <stdio.h>
-# include <stdlib.h>
+#define TESTS "./tests/"
+#include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 int main(void)
 {
