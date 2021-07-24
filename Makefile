@@ -19,10 +19,13 @@ TEST_BONUS = $(SRC_TEST_BONUS:.c=.o)
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 VALGRIND = valgrind -q -s --leak-check=yes
+QSANITIZE = qsanitize=address
 
-all: m b clean
+l: lm lb clean
 
-m : $(MANDATORY) $(TEST_MANDADORY)
+m: mm mb clean
+
+lm : $(MANDATORY) $(TEST_MANDADORY)
 	$(info )
 	$(info ********MANDATORY PART***********)
 	$(info )
@@ -33,7 +36,7 @@ m : $(MANDATORY) $(TEST_MANDADORY)
 	$(CC) $(CFLAGS) -D BUFFER_SIZE=107 $(SRCMANDATORY) $(SRC_TEST_MANDADORY)
 	$(VALGRIND) ./a.out
 
-b : $(BONUS) $(TEST_BONUS)
+lb : $(BONUS) $(TEST_BONUS)
 	$(info )
 	$(info ********BONUS PART***********)
 	$(info )
@@ -43,6 +46,29 @@ b : $(BONUS) $(TEST_BONUS)
 	$(VALGRIND) ./a.out
 	$(CC) $(CFLAGS) -D BUFFER_SIZE=107 $(SRCBONUS) $(SRC_TEST_BONUS)
 	$(VALGRIND) ./a.out
+
+mm : $(MANDATORY) $(TEST_MANDADORY)
+	$(info )
+	$(info ********MANDATORY PART***********)
+	$(info )
+	$(CC) $(CFLAGS) -D BUFFER_SIZE=1  $(QSANITIZE) $(SRCMANDATORY) $(SRC_TEST_MANDADORY)
+	./a.out
+	$(CC) $(CFLAGS) -D BUFFER_SIZE=42  $(QSANITIZE) $(SRCMANDATORY) $(SRC_TEST_MANDADORY)
+	./a.out
+	$(CC) $(CFLAGS) -D BUFFER_SIZE=107 $(QSANITIZE) $(SRCMANDATORY) $(SRC_TEST_MANDADORY)
+	./a.out
+
+mb : $(BONUS) $(TEST_BONUS)
+	$(info )
+	$(info ********BONUS PART***********)
+	$(info )
+	$(CC) $(CFLAGS) -D BUFFER_SIZE=1 $(QSANITIZE) $(SRCBONUS) $(SRC_TEST_BONUS)
+	./a.out
+	$(CC) $(CFLAGS) -D BUFFER_SIZE=42 $(QSANITIZE) $(SRCBONUS) $(SRC_TEST_BONUS)
+	./a.out
+	$(CC) $(CFLAGS) -D BUFFER_SIZE=107 $(QSANITIZE) $(SRCBONUS) $(SRC_TEST_BONUS)
+	./a.out
+
 
 clean:
 	$(info )
