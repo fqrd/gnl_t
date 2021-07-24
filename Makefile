@@ -19,7 +19,7 @@ TEST_BONUS = $(SRC_TEST_BONUS:.c=.o)
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 VALGRIND = valgrind -q -s --leak-check=yes
-QSANITIZE = qsanitize=address
+QSANITIZE = -fsanitize=address
 
 l: lm lb clean
 

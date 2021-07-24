@@ -19,7 +19,7 @@ int main(void)
 		TESTS "only_nl",
 		TESTS "long_nl",
 		TESTS "long_no_nl",
-		'\0'
+		NULL
 	};
 
 	while (tests[i])
