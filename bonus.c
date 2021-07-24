@@ -2,6 +2,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 # define TESTS "./tests/"
+# ifndef BUFFER_SIZE
+# define BUFFER_SIZE 0
+# endif
 
 #include "../get_next_line_bonus.h"
 
