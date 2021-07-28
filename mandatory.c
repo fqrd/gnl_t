@@ -11,13 +11,13 @@ int main(void)
 	char *line;
 	char *tests[] = 
 	{
-		TESTS "empty",
-		TESTS "line_nl",
-		TESTS "nl",
-		TESTS "no_nl",
-		TESTS "only_nl",
-		TESTS "long_nl",
-		TESTS "long_no_nl",
+		TESTS"empty",
+		TESTS"line_nl",
+		TESTS"nl",
+		TESTS"no_nl",
+		TESTS"only_nl",
+		TESTS"long_nl",
+		TESTS"long_no_nl",
 		NULL
 	};
 
@@ -32,6 +32,8 @@ int main(void)
 			free(line);
 			line = get_next_line(fd);
 		}
+		printf("%s", line);
+		printf("\n");
 		i++;
 	}
 	return (0);

@@ -32,6 +32,8 @@ int main(void)
 			free(line);
 			line = get_next_line(fd);
 		}
+		printf("%s", line);
+		printf("\n");
 		i++;
 	}
 	return (0);
